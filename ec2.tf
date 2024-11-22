@@ -6,7 +6,7 @@ resource "aws_launch_template" "nodes" {
       //kms_key_id            = data.aws_kms_key.encryption.arn
       delete_on_termination = true
       volume_type           = "gp2"
-      volume_size           = "50"
+      volume_size           = "8"
       encrypted             = true
     }
   }
