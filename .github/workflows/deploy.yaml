@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 concurrency:
   group: infra-deploy
 jobs:
@@ -38,7 +38,7 @@ jobs:
       run: |
         terraform plan -var-file=env/${{ matrix.environment }}/terraform.tfvars -no-color
     - name: Terraform apply
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/main'
       id: apply
       run: |
         terraform apply -var-file=${{ matrix.environment }}/terraform.tfvars -no-color --auto-approve=true
