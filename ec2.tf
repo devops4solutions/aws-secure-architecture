@@ -1,4 +1,4 @@
-/*data "aws_ami" "amazon_linux_3" {
+data "aws_ami" "amazon_linux_3" {
   most_recent = true
   owners      = ["137112412989"] # Amazon's official owner ID
 
@@ -13,8 +13,19 @@
   }
 }
 
+data "aws_subnets" "private" {
+  filter {
+    name   = "vpc-id"
+    values = [module.vpc.vpc_id]
+  }
+  tags = {
+    Name = "*Private*"
+  }
+}
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.amazon_linux_3.id
+  subnet_id = data.aws_subnets.private.id
   instance_type = "t2.micro"
   key_name = "ansible.pem"
    user_data = <<-EOF
@@ -26,4 +37,3 @@ resource "aws_instance" "web" {
     chown -R ec2-user:ec2-user /home/ec2-user/.ssh
   EOF
 }
-*/
