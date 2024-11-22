@@ -3,7 +3,7 @@ resource "aws_launch_template" "nodes" {
     device_name = "/dev/xvda"
     ebs {
 
-      kms_key_id            = data.aws_kms_key.encryption.arn
+      //kms_key_id            = data.aws_kms_key.encryption.arn
       delete_on_termination = true
       volume_type           = "gp2"
       volume_size           = "50"
@@ -18,11 +18,11 @@ resource "aws_launch_template" "nodes" {
   }))
   key_name = "ansible.pem"
   network_interfaces {
-    security_groups = [aws_security_group.jobmgr_group.id]
+    security_groups = [aws_security_group.sg.id]
   }
 }
 
-resource "aws_autoscaling_group" "jobmgr" {
+resource "aws_autoscaling_group" "asg" {
   name                = "${var.environment}-asg"
   desired_capacity    = "1"
   max_size            = "1"
