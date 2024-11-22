@@ -60,3 +60,13 @@ resource "aws_security_group" "sg" {
     Name = "sg-${var.environment}"
   }
 }
+
+data "aws_subnets" "private_subnets"{
+  filter {
+    name = "vpc-id"
+    values = [module.vpc.vpc_id]
+  }
+tags = {
+  Name = "*Private*"
+}
+}
