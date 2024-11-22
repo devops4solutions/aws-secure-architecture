@@ -1,4 +1,4 @@
-data "aws_ami" "amazon_linux_3" {
+/*data "aws_ami" "amazon_linux_3" {
   most_recent = true
   owners      = ["amazon"]
   filter {
@@ -21,3 +21,4 @@ resource "aws_instance" "web" {
     chown -R ec2-user:ec2-user /home/ec2-user/.ssh
   EOF
 }
+*/
