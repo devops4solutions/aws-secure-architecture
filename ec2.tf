@@ -16,7 +16,7 @@ resource "aws_launch_template" "nodes" {
   user_data = base64encode(templatefile("${path.module}/templates/user_data.tpl", {
     ssh_public_key = var.ssh_public_key
   }))
-  key_name = "ansible.pem"
+  key_name = "ansible"
   network_interfaces {
     security_groups = [aws_security_group.sg.id]
   }
