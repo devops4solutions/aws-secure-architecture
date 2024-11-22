@@ -3,13 +3,9 @@ data "aws_ami" "amazon_linux_3" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["amzn3-ami-hvm-*-x86_64-gp2"]
+    values = ["*al2023-ami-kernel-default-x86_64*"]
   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
 }
 
 resource "aws_instance" "web" {
