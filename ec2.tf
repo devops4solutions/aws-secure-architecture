@@ -1,11 +1,16 @@
 /*data "aws_ami" "amazon_linux_3" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["137112412989"] # Amazon's official owner ID
+
   filter {
     name   = "name"
-    values = ["*al2023-ami-kernel-default-x86_64*"]
+    values = ["al2023-ami-*-x86_64-gp2"]
   }
 
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
 
 resource "aws_instance" "web" {

@@ -41,4 +41,4 @@ jobs:
       if: github.ref == 'refs/heads/main'
       id: apply
       run: |
-        terraform apply -var-file=${{ matrix.environment }}/terraform.tfvars -no-color --auto-approve=true
+        terraform apply -var-file=env/${{ matrix.environment }}/terraform.tfvars -no-color --auto-approve=true
