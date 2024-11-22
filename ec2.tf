@@ -66,7 +66,7 @@ data "aws_subnets" "private_subnets"{
     name = "vpc-id"
     values = [module.vpc.vpc_id]
   }
-tags = {
+/*tags = {
   Name = "*Private*"
-}
+}*/
 }
