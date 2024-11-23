@@ -4,6 +4,6 @@ variable "region" {
 variable "environment" {
   default = ""
 }
-variable "ssh_public_key"{
+variable "ssh_public_key" {
   default = ""
 }

@@ -10,7 +10,7 @@ resource "aws_launch_template" "nodes" {
       encrypted             = true
     }
   }
-  name_prefix   = "${var.environment}"
+  name_prefix   = var.environment
   image_id      = "resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
   instance_type = "t2.micro"
   user_data = base64encode(templatefile("${path.module}/templates/user_data.tpl", {
@@ -19,7 +19,6 @@ resource "aws_launch_template" "nodes" {
   key_name = "ansible"
   network_interfaces {
     security_groups = [aws_security_group.sg.id]
-    associate_public_ip_address = true
   }
 }
 
@@ -28,7 +27,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity    = "1"
   max_size            = "1"
   min_size            = "1"
-  vpc_zone_identifier = data.aws_subnets.public_subnets.ids
+  vpc_zone_identifier = data.aws_subnets.private_subnets.ids
   launch_template {
     id      = aws_launch_template.nodes.id
     version = aws_launch_template.nodes.latest_version
@@ -36,7 +35,7 @@ resource "aws_autoscaling_group" "asg" {
   instance_refresh {
     strategy = "Rolling"
     preferences {
-      min_healthy_percentage       = 80
+      min_healthy_percentage = 80
     }
   }
   tag {
@@ -51,11 +50,11 @@ resource "aws_security_group" "sg" {
   name        = "${lower(var.environment)}-sg"
   description = "Security group for EC2 Instances"
   vpc_id      = module.vpc.vpc_id
-    # Ingress rule to allow traffic within the VPC
+  # Ingress rule to allow traffic within the VPC
   ingress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1" # Allows all protocols
+    protocol    = "-1"                        # Allows all protocols
     cidr_blocks = [module.vpc.vpc_cidr_block] # VPC CIDR block
   }
 
@@ -70,13 +69,13 @@ resource "aws_security_group" "sg" {
   }
 }
 
-data "aws_subnets" "public_subnets"{
+data "aws_subnets" "private_subnets" {
   filter {
-    name = "vpc-id"
+    name   = "vpc-id"
     values = [module.vpc.vpc_id]
   }
   filter {
     name   = "tag:Name"
-    values = ["*public*"] # This matches all subnets with a Name tag
+    values = ["*private*"] # This matches all subnets with a Name tag
   }
 }
