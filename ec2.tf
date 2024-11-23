@@ -25,9 +25,9 @@ resource "aws_launch_template" "nodes" {
 
 resource "aws_autoscaling_group" "asg" {
   name                = "${var.environment}-asg"
-  desired_capacity    = "2"
-  max_size            = "2"
-  min_size            = "2"
+  desired_capacity    = "1"
+  max_size            = "1"
+  min_size            = "1"
   vpc_zone_identifier = data.aws_subnets.public_subnets.ids
   launch_template {
     id      = aws_launch_template.nodes.id
@@ -51,6 +51,14 @@ resource "aws_security_group" "sg" {
   name        = "${lower(var.environment)}-sg"
   description = "Security group for EC2 Instances"
   vpc_id      = module.vpc.vpc_id
+    # Ingress rule to allow traffic within the VPC
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # Allows all protocols
+    cidr_blocks = [module.vpc.cidr_block] # VPC CIDR block
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
