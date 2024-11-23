@@ -1,4 +1,4 @@
-/*resource "aws_launch_template" "nodes" {
+resource "aws_launch_template" "nodes" {
   block_device_mappings {
     device_name = "/dev/xvda"
     ebs {
@@ -80,4 +80,3 @@ data "aws_subnets" "public_subnets"{
     values = ["*public*"] # This matches all subnets with a Name tag
   }
 }
-*/
