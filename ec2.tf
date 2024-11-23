@@ -62,7 +62,7 @@ resource "aws_security_group" "sg" {
   }
 }
 
-data "aws_subnets" "private_subnets"{
+data "aws_subnets" "public_subnets"{
   filter {
     name = "vpc-id"
     values = [module.vpc.vpc_id]
