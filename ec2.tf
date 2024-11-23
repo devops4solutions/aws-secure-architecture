@@ -56,7 +56,7 @@ resource "aws_security_group" "sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1" # Allows all protocols
-    cidr_blocks = [module.vpc.cidr_block] # VPC CIDR block
+    cidr_blocks = [module.vpc.vpc_cidr_block] # VPC CIDR block
   }
 
   egress {
