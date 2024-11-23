@@ -1,3 +1,3 @@
 #!/bin/bash
 mkdir -p /home/ec2-user/.ssh
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZ5yx7vJjLlcDjqbyA8QvsoOdyBxq4Oak4J5WITCCVhC4JFxv3WMoRofT60VXNGeNn9mxf5hKRjEWbRhUfU6iKku6kZh0Tm8CoZMz+6L+FS3m71+bUZxaqvg/Nb6iDOxvutt5yyPcPMLt9J5/wEsk8r4rQFl20l/aSI8MYkplcGZsBxCyxJVTT7Gs7kbFe7UgM3b1uyzNZm0TZlaRTfBT2WHv5wJVQEHxLL0+wLwI5EIzdouCKQoaiZsYwFC44fAyrDOgx0mqxdPIYRdknZdvje+bmAcZFVj6IV6yvcPCf0CS9o+GZYW6N0yxa4EqXo5LzRtT3OVRMNhad1m6e4GwGExoW4KDR2xhRnnTSDFJDzRyBRG7dVucwq8wj29JYsnNays/41RzLa/ysPhaF8PzNGnsCvMIrH15gs33bbsOdJEBBj6vnphtQ8HEJZ7xHPrUCVruAADBP3Zy1K0VKOVeXhxr8BlZ+TvMDgoFexpwEA6QQ2EA1uXq8OqbpUgJDufM= ec2-user@ip-10-0-103-29.ec2.internal" >> /home/ec2-user/.ssh/authorized_keys
+echo "${ssh_public_key}" >> /home/ec2-user/.ssh/authorized_keys
