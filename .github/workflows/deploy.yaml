@@ -19,6 +19,7 @@ jobs:
             - environment: dev
     env:
       TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      TF_VAR_ansible_user_password: ${{ secrets.ansible_user_password}}
     steps:
     - uses: actions/checkout@v2
     - name: Configure AWS credentials

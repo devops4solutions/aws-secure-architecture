@@ -15,6 +15,7 @@ resource "aws_launch_template" "nodes" {
   instance_type = "t2.micro"
   user_data = base64encode(templatefile("${path.module}/templates/user_data.tpl", {
     ssh_public_key = var.ssh_public_key
+    ansible_user_password = var.ansible_user_password
   }))
   key_name = "ansible"
   network_interfaces {

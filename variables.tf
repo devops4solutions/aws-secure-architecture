@@ -7,3 +7,6 @@ variable "environment" {
 variable "ssh_public_key" {
   default = ""
 }
+variable "ansible_user_password"{
+  default = ""
+}
