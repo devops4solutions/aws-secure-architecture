@@ -20,7 +20,7 @@ resource "aws_launch_template" "nodes" {
   key_name = "ansible"
   network_interfaces {
     security_groups = [aws_security_group.sg.id]
-    associate_public_ip_address = true
+    associate_public_ip_address = false
   }
 }
 
@@ -29,7 +29,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity    = "1"
   max_size            = "1"
   min_size            = "1"
-  vpc_zone_identifier = data.aws_subnets.public_subnets.ids
+  vpc_zone_identifier = data.aws_subnets.private_subnets.ids
   launch_template {
     id      = aws_launch_template.nodes.id
     version = aws_launch_template.nodes.latest_version
