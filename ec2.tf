@@ -26,9 +26,9 @@ resource "aws_launch_template" "nodes" {
 
 resource "aws_autoscaling_group" "asg" {
   name                = "${var.environment}-asg"
-  desired_capacity    = "1"
-  max_size            = "1"
-  min_size            = "1"
+  desired_capacity    = "0"
+  max_size            = "0"
+  min_size            = "0"
   vpc_zone_identifier = data.aws_subnets.public_subnets.ids
   launch_template {
     id      = aws_launch_template.nodes.id
